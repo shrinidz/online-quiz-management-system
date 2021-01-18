@@ -1,0 +1,358 @@
+<template name="quickVote">
+
+<div id="form" class="well">
+    <div class="numbers" id="count2" style="position: absolute; top: 10px; height: 60px; padding: 15px 0 0 10px; background-color: #000000; z-index: 20;"></div>
+    <img src="/images/bkgdimage.gif" class="background" style="position: absolute; left: 69px; top: 12px;"/>
+    <img src="/images/line.jpg" class="line" style="position: absolute; left: 69px; top: 40px;"/> 
+    <div class="numbers" id="dday" style="position: absolute; left: 69px; top: 21px;" ></div>
+    
+    <img src="/images/bkgdimage.gif" class="background" style="position: absolute; left: 141px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 141px; top: 40px;"/>
+    <div class="numbers" id="dhour" style="position: absolute; left: 141px; top: 21px;" ></div>
+    
+    <img src="images/bkgdimage.gif" class="background" style="position: absolute; left: 213px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 213px; top: 40px;"/>
+    <div class="numbers" id="dmin" style="position: absolute; left: 213px; top: 21px;" ></div>
+    
+    <img src="images/bkgdimage.gif" class="background" style="position: absolute; left: 285px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 285px; top: 40px;"/>
+    <div class="numbers" id="dsec" style="position: absolute; left: 285px; top: 21px;" ></div>
+    
+    <div class="title" id="days" style="position: absolute; left: 66px; top: 73px;" >Days</div>
+    <div class="title" id="hours" style="position: absolute; left: 138px; top: 73px;" >Hours</div>
+    <div class="title" id="minutes" style="position: absolute; left: 210px; top: 73px;" >Minutes</div>
+    <div class="title" id="seconds" style="position: absolute; left: 282px; top: 73px;" >Seconds</div>
+</div>
+
+{{#if isAdmin}}
+    <form class="form-signin" role="form">
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Candidate registered<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <form class="form-signin" role="form">
+                    
+                <h3> Registered candidates</h3>
+                
+                <ul>
+
+                {{#each regcandidate}}
+                <li> {{username}} </li> 
+
+                {{/each}}
+                </ul>
+              </form>
+            </li>
+          </ul>
+                  
+      </div>
+      {{#if quickstatus}}
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Start Vote<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <form class="form-signin" role="form">
+                <label for="end-date"> end date </label>
+                <input class = 'form-control datepicker' type="date" id="end-date" required>
+                <label for="end-time"> end time</label>
+                <input class = 'form-control' type="text" id="end-time" placeholder="HH:MM" required>
+                <a href="#" class="btn btn-lg btn-block" id="start-vote"> start vote!</a>
+                
+                
+              </form>
+            </li>
+          </ul>
+                  
+      </div>
+      <a href="#" class="btn btn-lg btn-danger btn-block" id="reset-vote" > Reset Quick Vote</a>
+      
+      {{else}}
+      <a href="#" class="btn btn-lg btn-danger btn-block" id="reset-vote" > Abort running vote</a>
+
+      {{/if}}
+
+    </form>
+{{else}}
+<form class="form-signin" role="form">
+    
+
+     <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Register as Candidate<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <form class="form-signin" role="form">
+                    <label for="c-username"> voterid 
+                     <input type="text" class="form-control" placeholder="Enter your voterid!" id="c-username" required > </label>
+                     <button class="btn btn-lg btn-success" id="c-register">Register</button>
+                   </form>
+                    </li>
+    
+                  </ul>
+
+
+                
+    </div>
+
+    <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown"> Vote <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <form class="form-signin" role="form">
+                        <p class="text-success"> Choose Candidate:
+                        <select class="btn btn-default"  id="candidates" required>
+                          {{#each regcandidate}}
+                            <option>{{username}}</option>
+                          {{/each}}
+                        </select> 
+                        </p>
+                        <p>
+                        <center><button class="btn btn-lg btn-warning" id="vote"> Vote!  <span class="glyphicon glyphicon-thumbs-up"> </span></button></center>
+                      </p>
+                      </form>
+                    </li>
+    
+                  </ul>
+
+                  
+                
+    </div>
+
+
+
+
+
+</form>
+
+
+{{/if}}
+
+
+
+
+</template>
+
+<template name="nationalVote">
+
+<div id="form" class="well">
+    <div class="numbers" id="count2" style="position: absolute; top: 10px; height: 60px; padding: 15px 0 0 10px; background-color: #000000; z-index: 20;"></div>
+    <img src="/images/bkgdimage.gif" class="background" style="position: absolute; left: 69px; top: 12px;"/>
+    <img src="/images/line.jpg" class="line" style="position: absolute; left: 69px; top: 40px;"/> 
+    <div class="numbers" id="dday" style="position: absolute; left: 69px; top: 21px;" ></div>
+    
+    <img src="/images/bkgdimage.gif" class="background" style="position: absolute; left: 141px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 141px; top: 40px;"/>
+    <div class="numbers" id="dhour" style="position: absolute; left: 141px; top: 21px;" ></div>
+    
+    <img src="images/bkgdimage.gif" class="background" style="position: absolute; left: 213px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 213px; top: 40px;"/>
+    <div class="numbers" id="dmin" style="position: absolute; left: 213px; top: 21px;" ></div>
+    
+    <img src="images/bkgdimage.gif" class="background" style="position: absolute; left: 285px; top: 12px;"/>
+    <img src="images/line.jpg" class="line" style="position: absolute; left: 285px; top: 40px;"/>
+    <div class="numbers" id="dsec" style="position: absolute; left: 285px; top: 21px;" ></div>
+    
+    <div class="title" id="days" style="position: absolute; left: 66px; top: 73px;" >Days</div>
+    <div class="title" id="hours" style="position: absolute; left: 138px; top: 73px;" >Hours</div>
+    <div class="title" id="minutes" style="position: absolute; left: 210px; top: 73px;" >Minutes</div>
+    <div class="title" id="seconds" style="position: absolute; left: 282px; top: 73px;" >Seconds</div>
+</div>
+
+{{#if isAdmin}}
+    <form class="form-signin" role="form">
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Party registered<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <form class="form-signin" role="form">
+                    
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                  <th>Party Leader</th>
+                  <th>Party Name</th>
+                  </tr> 
+                </thead>
+                <tbody>
+                
+                {{#each party}}
+                <tr> <td>{{username}}</td> <td>{{partyname}}</td></tr> 
+
+                {{/each}}
+              </tbody>
+              </table>
+              </form>
+              
+            </li>
+          </ul>
+
+                  
+      </div>
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Candidate registered<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <form class="form-signin" role="form">
+                    
+               <ul>
+
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                  <th>Candidate</th>
+                  <th>Party Name</th>
+                  <th>Seat </th>
+                  </tr> 
+                </thead>
+                <tbody>
+                
+                {{#each nationalvote}}
+                <tr> <td>{{username}}</td> <td>{{partyname}}</td><td>{{seatname}}</td></tr> 
+
+                {{/each}}
+              </tbody>
+              </table>
+
+                
+                </ul>
+
+
+              </form>
+            </li>
+          </ul>
+                  
+      </div>
+      
+
+
+      {{#if nationalstatus}}
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Start National Vote<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <form class="form-signin" role="form">
+                <label for="end-date">end date</label>
+                <input class = 'form-control datepicker' type="date" id="end-date" required>
+                <label for="end-time">end time</label>
+                <input class = 'form-control' type="text" id="end-time" placeholder="HH:MM" required>
+                <a href="#" class="btn btn-lg btn-block" id="start-vote">Start National vote!</a>
+           
+                
+              </form>
+            </li>
+          </ul>
+                  
+      </div>
+       <a href="#" class="btn btn-lg btn-danger btn-block" id="reset-vote" > Reset National Vote!</a>
+      {{else}}
+      <a href="#" class="btn btn-lg btn-danger btn-block" id="reset-vote" > Abort running vote</a>
+
+      {{/if}}
+
+    </form>
+{{else}}
+<form class="form-signin" role="form">
+    
+
+     <div class="dropdown">
+      <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Create a Party<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <form class="form-signin" role="form">
+                         <label for="c-teamname"> Party: 
+                     <input type="text" class="form-control" placeholder="Choose Party Name" id="c-teamname" required > </label>
+                     <label for="c-username"> voterid 
+                     <input type="text" class="form-control" placeholder="Enter your voterid!" id="c-username" required > </label>
+                    <button class="btn btn-lg btn-success" id="party-register">Create Party</button>
+                    
+                   </form>
+                    </li>
+    
+                  </ul>
+
+
+                
+    </div>
+    <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown">Register as Candidate<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                       <p class="text-success"> Choose Party:
+                        <select class="btn btn-default" required id="team-name">
+                          {{#each party}}
+                            <option>{{partyname}}</option>
+                          {{/each}}
+                        </select> 
+                        </p>
+                    </li>
+                    <li>
+                       <p class="text-success"> Choose Seat:
+                        <select class="btn btn-default" required id="seat-name">
+                          
+                          
+                          {{#each seat}}
+                            {{#each seats}}
+                            <option>{{this}}</option>
+                          {{/each}}
+                          {{/each}}
+                          
+                        </select> 
+                        </p>
+                    </li>
+
+
+                    <li>
+                      <form class="form-signin" role="form">
+
+                    <label for="c-username"> voterid 
+                     <input type="text" class="form-control" placeholder="Enter your voterid!" id="candidate-username" required ></label>
+                     <button class="btn btn-lg btn-success" id="candidate-register">Register</button>
+                   </form>
+                    </li>
+    
+                  </ul>
+      </div>
+
+
+    <div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-lg btn-block" data-toggle="dropdown"> Vote <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li>
+                      <form class="form-signin" role="form">
+                        <center><p class="text-success">Choose Seat:
+                        <select class="btn btn-default" required id="seats">
+                           {{#each seat}}
+                            {{#each seats}}
+                            <option>{{this}}</option>
+                          {{/each}}
+                          {{/each}}
+                            
+                        </select> 
+                        </p></center>
+                       <p>
+                        <center><button class="btn btn-lg btn-success" id="ok"><span class="glyphicon glyphicon-thumbs-up"> </span></button></center>
+                      </p>
+                      </form>
+                    </li>
+    
+                  </ul>
+
+                 
+                
+    </div>
+
+
+
+
+
+</form>
+
+
+{{/if}}
+
+
+
+
+
+
+</template>
+
